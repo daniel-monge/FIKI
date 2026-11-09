@@ -234,8 +234,8 @@ function cfgToText(cfg){
 }
 
 function parseStudent(raw){
+  // Replace unicode superscripts but keep spaces — removing spaces merges adjacent numbers (e.g. "1s2 2s2" → "1s22s2")
   let s=raw.replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹]/g,m=>UNSUP[m]).toLowerCase().trim();
-  s=s.replace(/\s+/g,'');
   const res={};
   const re=/([1-9][spdf])(\d+)/g; let m;
   while((m=re.exec(s))!==null) res[m[1]]=parseInt(m[2]);
